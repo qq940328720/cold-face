@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dal.dao.OrderManagerMapper">
+  <resultMap id="BaseResultMap" type="dal.model.OrderManager">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="merchant_code" jdbcType="VARCHAR" property="merchantCode" />
+    <result column="merchant_name" jdbcType="VARCHAR" property="merchantName" />
+    <result column="store_code" jdbcType="VARCHAR" property="storeCode" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+    <result column="product_code" jdbcType="VARCHAR" property="productCode" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="commodity_code" jdbcType="VARCHAR" property="commodityCode" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="level_1_code" jdbcType="VARCHAR" property="level1Code" />
+    <result column="level_2_code" jdbcType="VARCHAR" property="level2Code" />
+    <result column="level_3_code" jdbcType="VARCHAR" property="level3Code" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_nationalid" jdbcType="VARCHAR" property="userNationalid" />
+    <result column="user_gender" jdbcType="CHAR" property="userGender" />
+    <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="district_code" jdbcType="VARCHAR" property="districtCode" />
+    <result column="home_address" jdbcType="VARCHAR" property="homeAddress" />
+    <result column="emp_name_code" jdbcType="VARCHAR" property="empNameCode" />
+    <result column="lng" jdbcType="VARCHAR" property="lng" />
+    <result column="lat" jdbcType="VARCHAR" property="lat" />
+    <result column="loan_money" jdbcType="DECIMAL" property="loanMoney" />
+    <result column="first_pay_money" jdbcType="DECIMAL" property="firstPayMoney" />
+    <result column="commodity_price" jdbcType="DECIMAL" property="commodityPrice" />
+    <result column="interest_type" jdbcType="INTEGER" property="interestType" />
+    <result column="pay_time" jdbcType="TINYINT" property="payTime" />
+    <result column="pay_time_unit" jdbcType="BIT" property="payTimeUnit" />
+    <result column="pay_rate" jdbcType="DECIMAL" property="payRate" />
+    <result column="bank_card" jdbcType="VARCHAR" property="bankCard" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="order_audit_state" jdbcType="BIT" property="orderAuditState" />
+    <result column="img_audit_state" jdbcType="BIT" property="imgAuditState" />
+    <result column="send_audit_state" jdbcType="BIT" property="sendAuditState" />
+    <result column="final_loan_type" jdbcType="BIT" property="finalLoanType" />
+    <result column="pay_day" jdbcType="TINYINT" property="payDay" />
+    <result column="client_resource" jdbcType="BIT" property="clientResource" />
+    <result column="is_quick_pay_package" jdbcType="BIT" property="isQuickPayPackage" />
+    <result column="unique_code" jdbcType="VARCHAR" property="uniqueCode" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="is_warning" jdbcType="BIT" property="isWarning" />
+    <result column="is_recommend" jdbcType="BIT" property="isRecommend" />
+    <result column="insert_time" jdbcType="BIGINT" property="insertTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="bizid" jdbcType="VARCHAR" property="bizid" />
+    <result column="auth_code" jdbcType="VARCHAR" property="authCode" />
+    <result column="is_auth" jdbcType="BIT" property="isAuth" />
+    <result column="is_telephonedirectory" jdbcType="BIT" property="isTelephonedirectory" />
+    <result column="ip_src" jdbcType="VARCHAR" property="ipSrc" />
+    <result column="receive_type" jdbcType="BIT" property="receiveType" />
+    <result column="recieve_state" jdbcType="BIT" property="recieveState" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="dal.model.OrderManager">
+    <result column="td_blackbox" jdbcType="LONGVARCHAR" property="tdBlackbox" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_code, user_code, org_code, org_name, merchant_code, merchant_name, store_code, 
+    store_name, product_code, product_name, commodity_code, commodity_name, level_1_code, 
+    level_2_code, level_3_code, user_name, user_phone, user_nationalid, user_gender, 
+    province_code, city_code, district_code, home_address, emp_name_code, lng, lat, loan_money, 
+    first_pay_money, commodity_price, interest_type, pay_time, pay_time_unit, pay_rate, 
+    bank_card, bank_name, state, order_audit_state, img_audit_state, send_audit_state, 
+    final_loan_type, pay_day, client_resource, is_quick_pay_package, unique_code, deleted, 
+    is_warning, is_recommend, insert_time, update_time, bizid, auth_code, is_auth, is_telephonedirectory, 
+    ip_src, receive_type, recieve_state
+  </sql>
+  <sql id="Blob_Column_List">
+    td_blackbox
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order_manager
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_manager
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="dal.model.OrderManager">
+    insert into order_manager (id, order_code, user_code, 
+      org_code, org_name, merchant_code, 
+      merchant_name, store_code, store_name, 
+      product_code, product_name, commodity_code, 
+      commodity_name, level_1_code, level_2_code, 
+      level_3_code, user_name, user_phone, 
+      user_nationalid, user_gender, province_code, 
+      city_code, district_code, home_address, 
+      emp_name_code, lng, lat, 
+      loan_money, first_pay_money, commodity_price, 
+      interest_type, pay_time, pay_time_unit, 
+      pay_rate, bank_card, bank_name, 
+      state, order_audit_state, img_audit_state, 
+      send_audit_state, final_loan_type, pay_day, 
+      client_resource, is_quick_pay_package, unique_code, 
+      deleted, is_warning, is_recommend, 
+      insert_time, update_time, bizid, 
+      auth_code, is_auth, is_telephonedirectory, 
+      ip_src, receive_type, recieve_state, 
+      td_blackbox)
+    values (#{id,jdbcType=INTEGER}, #{orderCode,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{merchantCode,jdbcType=VARCHAR}, 
+      #{merchantName,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, 
+      #{productCode,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{commodityCode,jdbcType=VARCHAR}, 
+      #{commodityName,jdbcType=VARCHAR}, #{level1Code,jdbcType=VARCHAR}, #{level2Code,jdbcType=VARCHAR}, 
+      #{level3Code,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userNationalid,jdbcType=VARCHAR}, #{userGender,jdbcType=CHAR}, #{provinceCode,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{districtCode,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, 
+      #{empNameCode,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, 
+      #{loanMoney,jdbcType=DECIMAL}, #{firstPayMoney,jdbcType=DECIMAL}, #{commodityPrice,jdbcType=DECIMAL}, 
+      #{interestType,jdbcType=INTEGER}, #{payTime,jdbcType=TINYINT}, #{payTimeUnit,jdbcType=BIT}, 
+      #{payRate,jdbcType=DECIMAL}, #{bankCard,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, 
+      #{state,jdbcType=TINYINT}, #{orderAuditState,jdbcType=BIT}, #{imgAuditState,jdbcType=BIT}, 
+      #{sendAuditState,jdbcType=BIT}, #{finalLoanType,jdbcType=BIT}, #{payDay,jdbcType=TINYINT}, 
+      #{clientResource,jdbcType=BIT}, #{isQuickPayPackage,jdbcType=BIT}, #{uniqueCode,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=BIT}, #{isWarning,jdbcType=BIT}, #{isRecommend,jdbcType=BIT}, 
+      #{insertTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{bizid,jdbcType=VARCHAR}, 
+      #{authCode,jdbcType=VARCHAR}, #{isAuth,jdbcType=BIT}, #{isTelephonedirectory,jdbcType=BIT}, 
+      #{ipSrc,jdbcType=VARCHAR}, #{receiveType,jdbcType=BIT}, #{recieveState,jdbcType=BIT}, 
+      #{tdBlackbox,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="dal.model.OrderManager">
+    insert into order_manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="merchantCode != null">
+        merchant_code,
+      </if>
+      <if test="merchantName != null">
+        merchant_name,
+      </if>
+      <if test="storeCode != null">
+        store_code,
+      </if>
+      <if test="storeName != null">
+        store_name,
+      </if>
+      <if test="productCode != null">
+        product_code,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="commodityCode != null">
+        commodity_code,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="level1Code != null">
+        level_1_code,
+      </if>
+      <if test="level2Code != null">
+        level_2_code,
+      </if>
+      <if test="level3Code != null">
+        level_3_code,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userNationalid != null">
+        user_nationalid,
+      </if>
+      <if test="userGender != null">
+        user_gender,
+      </if>
+      <if test="provinceCode != null">
+        province_code,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="districtCode != null">
+        district_code,
+      </if>
+      <if test="homeAddress != null">
+        home_address,
+      </if>
+      <if test="empNameCode != null">
+        emp_name_code,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="loanMoney != null">
+        loan_money,
+      </if>
+      <if test="firstPayMoney != null">
+        first_pay_money,
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price,
+      </if>
+      <if test="interestType != null">
+        interest_type,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="payTimeUnit != null">
+        pay_time_unit,
+      </if>
+      <if test="payRate != null">
+        pay_rate,
+      </if>
+      <if test="bankCard != null">
+        bank_card,
+      </if>
+      <if test="bankName != null">
+        bank_name,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="orderAuditState != null">
+        order_audit_state,
+      </if>
+      <if test="imgAuditState != null">
+        img_audit_state,
+      </if>
+      <if test="sendAuditState != null">
+        send_audit_state,
+      </if>
+      <if test="finalLoanType != null">
+        final_loan_type,
+      </if>
+      <if test="payDay != null">
+        pay_day,
+      </if>
+      <if test="clientResource != null">
+        client_resource,
+      </if>
+      <if test="isQuickPayPackage != null">
+        is_quick_pay_package,
+      </if>
+      <if test="uniqueCode != null">
+        unique_code,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="isWarning != null">
+        is_warning,
+      </if>
+      <if test="isRecommend != null">
+        is_recommend,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="bizid != null">
+        bizid,
+      </if>
+      <if test="authCode != null">
+        auth_code,
+      </if>
+      <if test="isAuth != null">
+        is_auth,
+      </if>
+      <if test="isTelephonedirectory != null">
+        is_telephonedirectory,
+      </if>
+      <if test="ipSrc != null">
+        ip_src,
+      </if>
+      <if test="receiveType != null">
+        receive_type,
+      </if>
+      <if test="recieveState != null">
+        recieve_state,
+      </if>
+      <if test="tdBlackbox != null">
+        td_blackbox,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantCode != null">
+        #{merchantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null">
+        #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCode != null">
+        #{storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null">
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCode != null">
+        #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="level1Code != null">
+        #{level1Code,jdbcType=VARCHAR},
+      </if>
+      <if test="level2Code != null">
+        #{level2Code,jdbcType=VARCHAR},
+      </if>
+      <if test="level3Code != null">
+        #{level3Code,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userNationalid != null">
+        #{userNationalid,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null">
+        #{userGender,jdbcType=CHAR},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null">
+        #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null">
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="empNameCode != null">
+        #{empNameCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="loanMoney != null">
+        #{loanMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="firstPayMoney != null">
+        #{firstPayMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityPrice != null">
+        #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="interestType != null">
+        #{interestType,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TINYINT},
+      </if>
+      <if test="payTimeUnit != null">
+        #{payTimeUnit,jdbcType=BIT},
+      </if>
+      <if test="payRate != null">
+        #{payRate,jdbcType=DECIMAL},
+      </if>
+      <if test="bankCard != null">
+        #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="orderAuditState != null">
+        #{orderAuditState,jdbcType=BIT},
+      </if>
+      <if test="imgAuditState != null">
+        #{imgAuditState,jdbcType=BIT},
+      </if>
+      <if test="sendAuditState != null">
+        #{sendAuditState,jdbcType=BIT},
+      </if>
+      <if test="finalLoanType != null">
+        #{finalLoanType,jdbcType=BIT},
+      </if>
+      <if test="payDay != null">
+        #{payDay,jdbcType=TINYINT},
+      </if>
+      <if test="clientResource != null">
+        #{clientResource,jdbcType=BIT},
+      </if>
+      <if test="isQuickPayPackage != null">
+        #{isQuickPayPackage,jdbcType=BIT},
+      </if>
+      <if test="uniqueCode != null">
+        #{uniqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="isWarning != null">
+        #{isWarning,jdbcType=BIT},
+      </if>
+      <if test="isRecommend != null">
+        #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="bizid != null">
+        #{bizid,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null">
+        #{authCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuth != null">
+        #{isAuth,jdbcType=BIT},
+      </if>
+      <if test="isTelephonedirectory != null">
+        #{isTelephonedirectory,jdbcType=BIT},
+      </if>
+      <if test="ipSrc != null">
+        #{ipSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveType != null">
+        #{receiveType,jdbcType=BIT},
+      </if>
+      <if test="recieveState != null">
+        #{recieveState,jdbcType=BIT},
+      </if>
+      <if test="tdBlackbox != null">
+        #{tdBlackbox,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="dal.model.OrderManager">
+    update order_manager
+    <set>
+      <if test="orderCode != null">
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantCode != null">
+        merchant_code = #{merchantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null">
+        merchant_name = #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCode != null">
+        store_code = #{storeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null">
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCode != null">
+        commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="level1Code != null">
+        level_1_code = #{level1Code,jdbcType=VARCHAR},
+      </if>
+      <if test="level2Code != null">
+        level_2_code = #{level2Code,jdbcType=VARCHAR},
+      </if>
+      <if test="level3Code != null">
+        level_3_code = #{level3Code,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userNationalid != null">
+        user_nationalid = #{userNationalid,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null">
+        user_gender = #{userGender,jdbcType=CHAR},
+      </if>
+      <if test="provinceCode != null">
+        province_code = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null">
+        district_code = #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null">
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="empNameCode != null">
+        emp_name_code = #{empNameCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        lng = #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="loanMoney != null">
+        loan_money = #{loanMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="firstPayMoney != null">
+        first_pay_money = #{firstPayMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityPrice != null">
+        commodity_price = #{commodityPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="interestType != null">
+        interest_type = #{interestType,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TINYINT},
+      </if>
+      <if test="payTimeUnit != null">
+        pay_time_unit = #{payTimeUnit,jdbcType=BIT},
+      </if>
+      <if test="payRate != null">
+        pay_rate = #{payRate,jdbcType=DECIMAL},
+      </if>
+      <if test="bankCard != null">
+        bank_card = #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="orderAuditState != null">
+        order_audit_state = #{orderAuditState,jdbcType=BIT},
+      </if>
+      <if test="imgAuditState != null">
+        img_audit_state = #{imgAuditState,jdbcType=BIT},
+      </if>
+      <if test="sendAuditState != null">
+        send_audit_state = #{sendAuditState,jdbcType=BIT},
+      </if>
+      <if test="finalLoanType != null">
+        final_loan_type = #{finalLoanType,jdbcType=BIT},
+      </if>
+      <if test="payDay != null">
+        pay_day = #{payDay,jdbcType=TINYINT},
+      </if>
+      <if test="clientResource != null">
+        client_resource = #{clientResource,jdbcType=BIT},
+      </if>
+      <if test="isQuickPayPackage != null">
+        is_quick_pay_package = #{isQuickPayPackage,jdbcType=BIT},
+      </if>
+      <if test="uniqueCode != null">
+        unique_code = #{uniqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="isWarning != null">
+        is_warning = #{isWarning,jdbcType=BIT},
+      </if>
+      <if test="isRecommend != null">
+        is_recommend = #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="bizid != null">
+        bizid = #{bizid,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null">
+        auth_code = #{authCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuth != null">
+        is_auth = #{isAuth,jdbcType=BIT},
+      </if>
+      <if test="isTelephonedirectory != null">
+        is_telephonedirectory = #{isTelephonedirectory,jdbcType=BIT},
+      </if>
+      <if test="ipSrc != null">
+        ip_src = #{ipSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveType != null">
+        receive_type = #{receiveType,jdbcType=BIT},
+      </if>
+      <if test="recieveState != null">
+        recieve_state = #{recieveState,jdbcType=BIT},
+      </if>
+      <if test="tdBlackbox != null">
+        td_blackbox = #{tdBlackbox,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="dal.model.OrderManager">
+    update order_manager
+    set order_code = #{orderCode,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      merchant_code = #{merchantCode,jdbcType=VARCHAR},
+      merchant_name = #{merchantName,jdbcType=VARCHAR},
+      store_code = #{storeCode,jdbcType=VARCHAR},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      level_1_code = #{level1Code,jdbcType=VARCHAR},
+      level_2_code = #{level2Code,jdbcType=VARCHAR},
+      level_3_code = #{level3Code,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_nationalid = #{userNationalid,jdbcType=VARCHAR},
+      user_gender = #{userGender,jdbcType=CHAR},
+      province_code = #{provinceCode,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      district_code = #{districtCode,jdbcType=VARCHAR},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      emp_name_code = #{empNameCode,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      loan_money = #{loanMoney,jdbcType=DECIMAL},
+      first_pay_money = #{firstPayMoney,jdbcType=DECIMAL},
+      commodity_price = #{commodityPrice,jdbcType=DECIMAL},
+      interest_type = #{interestType,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=TINYINT},
+      pay_time_unit = #{payTimeUnit,jdbcType=BIT},
+      pay_rate = #{payRate,jdbcType=DECIMAL},
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      order_audit_state = #{orderAuditState,jdbcType=BIT},
+      img_audit_state = #{imgAuditState,jdbcType=BIT},
+      send_audit_state = #{sendAuditState,jdbcType=BIT},
+      final_loan_type = #{finalLoanType,jdbcType=BIT},
+      pay_day = #{payDay,jdbcType=TINYINT},
+      client_resource = #{clientResource,jdbcType=BIT},
+      is_quick_pay_package = #{isQuickPayPackage,jdbcType=BIT},
+      unique_code = #{uniqueCode,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT},
+      is_warning = #{isWarning,jdbcType=BIT},
+      is_recommend = #{isRecommend,jdbcType=BIT},
+      insert_time = #{insertTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      bizid = #{bizid,jdbcType=VARCHAR},
+      auth_code = #{authCode,jdbcType=VARCHAR},
+      is_auth = #{isAuth,jdbcType=BIT},
+      is_telephonedirectory = #{isTelephonedirectory,jdbcType=BIT},
+      ip_src = #{ipSrc,jdbcType=VARCHAR},
+      receive_type = #{receiveType,jdbcType=BIT},
+      recieve_state = #{recieveState,jdbcType=BIT},
+      td_blackbox = #{tdBlackbox,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="dal.model.OrderManager">
+    update order_manager
+    set order_code = #{orderCode,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      merchant_code = #{merchantCode,jdbcType=VARCHAR},
+      merchant_name = #{merchantName,jdbcType=VARCHAR},
+      store_code = #{storeCode,jdbcType=VARCHAR},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      product_code = #{productCode,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      level_1_code = #{level1Code,jdbcType=VARCHAR},
+      level_2_code = #{level2Code,jdbcType=VARCHAR},
+      level_3_code = #{level3Code,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_nationalid = #{userNationalid,jdbcType=VARCHAR},
+      user_gender = #{userGender,jdbcType=CHAR},
+      province_code = #{provinceCode,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      district_code = #{districtCode,jdbcType=VARCHAR},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      emp_name_code = #{empNameCode,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      loan_money = #{loanMoney,jdbcType=DECIMAL},
+      first_pay_money = #{firstPayMoney,jdbcType=DECIMAL},
+      commodity_price = #{commodityPrice,jdbcType=DECIMAL},
+      interest_type = #{interestType,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=TINYINT},
+      pay_time_unit = #{payTimeUnit,jdbcType=BIT},
+      pay_rate = #{payRate,jdbcType=DECIMAL},
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      order_audit_state = #{orderAuditState,jdbcType=BIT},
+      img_audit_state = #{imgAuditState,jdbcType=BIT},
+      send_audit_state = #{sendAuditState,jdbcType=BIT},
+      final_loan_type = #{finalLoanType,jdbcType=BIT},
+      pay_day = #{payDay,jdbcType=TINYINT},
+      client_resource = #{clientResource,jdbcType=BIT},
+      is_quick_pay_package = #{isQuickPayPackage,jdbcType=BIT},
+      unique_code = #{uniqueCode,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT},
+      is_warning = #{isWarning,jdbcType=BIT},
+      is_recommend = #{isRecommend,jdbcType=BIT},
+      insert_time = #{insertTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      bizid = #{bizid,jdbcType=VARCHAR},
+      auth_code = #{authCode,jdbcType=VARCHAR},
+      is_auth = #{isAuth,jdbcType=BIT},
+      is_telephonedirectory = #{isTelephonedirectory,jdbcType=BIT},
+      ip_src = #{ipSrc,jdbcType=VARCHAR},
+      receive_type = #{receiveType,jdbcType=BIT},
+      recieve_state = #{recieveState,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
