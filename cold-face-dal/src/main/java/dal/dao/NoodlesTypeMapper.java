@@ -1,7 +1,9 @@
 package dal.dao;
 
 import dal.model.NoodlesType;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface NoodlesTypeMapper {
     int deleteByPrimaryKey(Integer id);
 
