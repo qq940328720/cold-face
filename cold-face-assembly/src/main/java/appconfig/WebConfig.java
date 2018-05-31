@@ -7,10 +7,15 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 @ComponentScan(value = {"com.cold.face.web", "swaggerconfig"})
 //@EnableCaching
-public class WebConfig extends WebMvcConfigurerAdapter {
+/*
+//extend WebMvcConfigurationSupport don't need the @EnableWebMvc annotation
+//extend WebMvcConfigurerAdapter need the @EnableWebMvc annotation
+//both WebMvcConfigurationSupport and WebMvcConfigurerAdapter need the @Configuration annotation
+*/
+public class WebConfig extends WebMvcConfigurationSupport {
     /**
      * Spring方法参数校验
      *
