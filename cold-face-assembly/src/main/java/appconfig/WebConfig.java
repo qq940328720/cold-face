@@ -11,9 +11,9 @@ import org.springframework.web.servlet.config.annotation.*;
 @ComponentScan(value = {"com.cold.face.web", "swaggerconfig"})
 //@EnableCaching
 /*
-//extend WebMvcConfigurationSupport don't need the @EnableWebMvc annotation
-//extend WebMvcConfigurerAdapter need the @EnableWebMvc annotation
-//both WebMvcConfigurationSupport and WebMvcConfigurerAdapter need the @Configuration annotation
+    extend WebMvcConfigurationSupport don't need the @EnableWebMvc annotation
+    extend WebMvcConfigurerAdapter need the @EnableWebMvc annotation
+    both WebMvcConfigurationSupport and WebMvcConfigurerAdapter need the @Configuration annotation
 */
 public class WebConfig extends WebMvcConfigurationSupport {
     /**
