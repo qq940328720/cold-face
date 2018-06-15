@@ -154,7 +154,7 @@ public class DBConfig {
         LOGGER.info("初始化SqlSessionFactoryBean====开始");
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setTypeAliasesPackage("com.aishang.rulemanager.dal.model");
+        sessionFactory.setTypeAliasesPackage("dal.model");
         PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver();
         String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + MAPPER_PATH;
         sessionFactory.setMapperLocations(pathMatchingResourcePatternResolver.getResources(packageSearchPath));

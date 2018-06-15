@@ -4,7 +4,7 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class NoodlesTypeProvider {
 
-    public String selectPersonLike() {
+    public String selectNoodlesType() {
         return new SQL() {{
             SELECT("*");
             FROM("noodles_type");

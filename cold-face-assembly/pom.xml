@@ -14,7 +14,7 @@
     <name>cold-face-assembly Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <build>
-        <finalName>rule-manager-assembly</finalName>
+        <finalName>cold-face-assembly</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

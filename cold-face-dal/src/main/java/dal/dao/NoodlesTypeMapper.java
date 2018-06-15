@@ -24,7 +24,7 @@ public interface NoodlesTypeMapper {
 
     int updateByPrimaryKey(NoodlesType record);
 
-    @SelectProvider(type = NoodlesTypeProvider.class, method = "selectPersonLike")
+    @SelectProvider(type = NoodlesTypeProvider.class, method = "selectNoodlesType")
     List<NoodlesType> selectAllProvider();
 
     List<NoodlesType> selectAll();
